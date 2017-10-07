@@ -18,7 +18,7 @@ final class Module_Guestbook extends GDO_Module
 	### Module ###
 	##############
     public $module_priority = 45;
-	public function getClasses() { return ['GDO\Guestbook\GDO_Guestbook', 'GDO\Guestbook\GDO_Entry']; }
+	public function getClasses() { return ['GDO\Guestbook\GDO_Guestbook']; }
 	public function onInstall() { return Install::onInstall(); }
 	public function onLoadLanguage() { return $this->loadLanguage('lang/guestbook'); }
 
