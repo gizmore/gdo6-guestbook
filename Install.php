@@ -8,7 +8,7 @@ final class Install
 {
 	public static function onInstall()
 	{
-		if (!($gb = GDO_Guestbook::forSite()))
+		if (!(GDO_Guestbook::forSite()))
 		{
 		    GDO_Guestbook::blank(array(
     			'gb_id' => '1',
