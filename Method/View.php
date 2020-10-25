@@ -7,10 +7,7 @@ use GDO\Guestbook\GDO_Guestbook;
 use GDO\Guestbook\GDO_GuestbookMessage;
 use GDO\DB\GDT_Object;
 use GDO\Core\GDT_Response;
-use GDO\UI\GDT_Bar;
-use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
-use GDO\User\PermissionException;
 use GDO\UI\GDT_Card;
 use GDO\UI\GDT_Paragraph;
 use GDO\Guestbook\Module_Guestbook;
@@ -19,12 +16,29 @@ final class View extends MethodQueryList
 {
     /** @var $guestbook GDO_Guestbook **/
     private $guestbook;
+
+    public function isQuicksorted() { return true; }
+    public function isQuicksearchable() { return true; }
+    public function defaultOrderField() { return 'gbm_created'; }
+    public function defaultOrderDirAsc() { return false; }
     
     public function gdoParameters()
     {
         return array_merge(parent::gdoParameters(), array(
-            GDT_Object::make('id')->table(GDO_Guestbook::table())->notNull()->initial('1'),
+            GDT_Object::make('id')->table(GDO_Guestbook::table())->notNull()->initial('1')->searchable(false)->orderable(false),
         ));
+    }
+    
+    public function gdoFilters()
+    {
+        $table = GDO_GuestbookMessage::table();
+        return array(
+            $table->gdoColumn('gbm_message'),
+            $table->gdoColumn('gbm_user'),
+            $table->gdoColumn('gbm_email'),
+            $table->gdoColumn('gbm_website'),
+            $table->gdoColumn('gbm_created'),
+        );
     }
     
     /**
