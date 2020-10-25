@@ -1,0 +1,104 @@
+<?php
+namespace GDO\Guestbook;
+
+use GDO\Core\GDO;
+use GDO\DB\GDT_AutoInc;
+use GDO\DB\GDT_Object;
+use GDO\DB\GDT_CreatedBy;
+use GDO\DB\GDT_CreatedAt;
+use GDO\User\GDO_User;
+use GDO\UI\GDT_Message;
+use GDO\Date\GDT_DateTime;
+use GDO\Profile\GDT_User;
+use GDO\Mail\GDT_Email;
+use GDO\Net\GDT_Url;
+use GDO\Core\GDT_Template;
+use GDO\DB\GDT_DeletedBy;
+use GDO\DB\GDT_DeletedAt;
+
+/**
+ * Guestbook messages.
+ * Not cached.
+ * Approval optional.
+ * Email and Website optional.
+ * @author gizmore
+ * @version 6.10
+ * @since 6.09
+ */
+final class GDO_GuestbookMessage extends GDO
+{
+    ###########
+    ### GDO ###
+    ###########
+    public function gdoCached() { return false; }
+    public function gdoColumns()
+    {
+        return array(
+            GDT_AutoInc::make('gbm_id'),
+            GDT_Object::make('gbm_guestbook')->notNull()->table(GDO_Guestbook::table()),
+            GDT_Message::make('gbm_message')->notNull(),
+            GDT_Email::make('gbm_email'),
+            GDT_Url::make('gbm_website')->reachable()->noFollow(),
+            GDT_CreatedBy::make('gbm_user'),
+            GDT_CreatedAt::make('gbm_created'),
+            GDT_User::make('gbm_approver'),
+            GDT_DateTime::make('gbm_approved'),
+            GDT_DeletedBy::make('gbm_deletor'),
+            GDT_DeletedAt::make('gbm_deleted'),
+        );
+    }
+    
+    ##############
+    ### Getter ###
+    ##############
+    /**
+     * @return GDO_User
+     */
+    public function getUser() { return $this->getValue('gbm_user'); }
+    public function getUserID() { return $this->getVar('gbm_user'); }
+    /**
+     * @return GDO_Guestbook
+     */
+    public function getGuestbook() { return $this->getValue('gbm_guestbook'); }
+    public function getGuestbookID() { return $this->getVar('gbm_guestbook'); }
+    public function isApproved() { return $this->getVar('gbm_approved') !== null; }
+    public function isDeleted() { return $this->getVar('gbm_deleted') !== null; }
+    
+    ##############
+    ### Render ###
+    ##############
+    public function displayMessage() { return $this->gdoColumn('gbm_message')->renderCell(); }
+    public function displayEmail() { return $this->gdoColumn('gbm_email')->renderCell(); }
+    public function displayWebsite() { return $this->getValue('gbm_website') ? $this->gdoColumn('gbm_website')->renderCell() : ''; }
+    public function renderList() { return GDT_Template::php('Guestbook', 'list/message.php', ['gdo' => $this]); }
+    
+    ############
+    ### HREF ###
+    ############
+    public function hrefDelete() { return href('Guestbook', 'Delete', "&id={$this->getID()}&token={$this->gdoHashcode()}"); }
+    public function hrefApprove() { return href('Guestbook', 'Approve', "&id={$this->getID()}&token={$this->gdoHashcode()}"); }
+    
+    ##################
+    ### Permission ###
+    ##################
+    public function canDelete(GDO_User $user=null)
+    {
+        if ($this->isDeleted())
+        {
+            return false;
+        }
+        $user = $user ? $user : GDO_User::current();
+        return $user->isStaff() || ($user->getID() === $this->getUserID());
+    }
+
+    public function canApprove(GDO_User $user=null)
+    {
+        if ($this->isApproved())
+        {
+            return false;
+        }
+        $user = $user ? $user : GDO_User::current();
+        return $user->isStaff();
+    }
+
+}

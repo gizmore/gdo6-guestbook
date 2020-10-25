@@ -13,7 +13,7 @@ final class Install
 		    GDO_Guestbook::blank(array(
     			'gb_id' => '1',
     			'gb_title' => t('guestbook_default_title'),
-		        'gb_descr' => t('guestbook_default_descr'),
+		        'gb_descr' => t('guestbook_default_descr',  [sitename()]),
 		    ))->insert();
 		}
 	}
