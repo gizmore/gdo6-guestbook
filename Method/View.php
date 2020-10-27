@@ -86,7 +86,7 @@ final class View extends MethodQueryList
         if ($this->getPage() === '1')
         {
             $card = GDT_Card::make('gbcard')->gdo($gb);
-            $card->title($gb->displayTitle());
+            $card->title($gb->gdoColumn('gb_title'));
             $card->addField(GDT_Paragraph::make()->html($gb->displayDescription()));
         }
         
