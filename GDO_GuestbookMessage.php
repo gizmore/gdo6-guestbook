@@ -35,14 +35,14 @@ final class GDO_GuestbookMessage extends GDO
     {
         return array(
             GDT_AutoInc::make('gbm_id'),
-            GDT_Object::make('gbm_guestbook')->notNull()->table(GDO_Guestbook::table()),
+            GDT_Object::make('gbm_guestbook')->notNull()->editable(false)->table(GDO_Guestbook::table()),
             GDT_Message::make('gbm_message')->notNull(),
             GDT_Email::make('gbm_email'),
             GDT_Url::make('gbm_website')->reachable()->noFollow(),
-            GDT_CreatedBy::make('gbm_user'),
+            GDT_CreatedBy::make('gbm_user')->editable(false),
             GDT_CreatedAt::make('gbm_created'),
-            GDT_User::make('gbm_approver'),
-            GDT_DateTime::make('gbm_approved'),
+            GDT_User::make('gbm_approver')->editable(false),
+            GDT_DateTime::make('gbm_approved')->editable(false),
             GDT_DeletedBy::make('gbm_deletor'),
             GDT_DeletedAt::make('gbm_deleted'),
         );
@@ -75,6 +75,7 @@ final class GDO_GuestbookMessage extends GDO
     ############
     ### HREF ###
     ############
+    public function hrefEdit() { return href('Guestbook', 'Edit', "&id={$this->getID()}"); }
     public function hrefDelete() { return href('Guestbook', 'Delete', "&id={$this->getID()}&token={$this->gdoHashcode()}"); }
     public function hrefApprove() { return href('Guestbook', 'Approve', "&id={$this->getID()}&token={$this->gdoHashcode()}"); }
     

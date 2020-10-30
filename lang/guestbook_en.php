@@ -1,8 +1,10 @@
 <?php
 return array(
 'link_guestbook' => 'Guestbook',
-'link_your_guestbook' => 'Your guestbook',
 'gdo_guestbook' => 'Guestbook',
+'gbm_guestbook' => 'Guestbook',
+'link_your_guestbook' => 'Your guestbook',
+'gdo_guestbookmessage' => 'Guestbook Entry',
 
 # Config
 'cfg_gb_ipp' => 'Messages per page',
@@ -68,7 +70,8 @@ return array(
 'link_approvals' => 'Awaiting approval',
 'link_site_guestbook' => 'Configure site guestbook',
 'link_configure_gb_module' => 'Configure module',
-    
+'gbm_approved' => 'Approved at',
+
 # Mail Approve
 'mail_subj_gb_moderate' => '%s Guestbook Entry',
 'mail_body_gb_moderate' => '
