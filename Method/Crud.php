@@ -12,6 +12,7 @@ use GDO\User\PermissionException;
 use GDO\UI\GDT_Divider;
 use GDO\Core\MethodAdmin;
 use GDO\User\GDO_UserSetting;
+use GDO\UI\GDT_Page;
 
 /**
  * Manage Guestbooks.
@@ -28,6 +29,14 @@ final class Crud extends MethodCrud
 {
     use MethodAdmin;
     
+    public function beforeExecute()
+    {
+        if ($this->getCRUDID() === '1')
+        {
+            $this->renderNavBar();
+        }
+    }
+    
     public function isUserRequired() { return false; }
     
     public function getPermission()
@@ -41,12 +50,9 @@ final class Crud extends MethodCrud
         if ($this->gdo && ($this->gdo->getID() === '1'))
         {
             $mod = Module_Guestbook::instance();
-            return $this->renderNavBar()->add($mod->adminBar())->add(parent::execute());
+            GDT_Page::$INSTANCE->topTabs->addField($mod->adminBar());
         }
-        else
-        {
-            return parent::execute();
-        }
+        return parent::execute();
     }
     
     public function hrefList()
