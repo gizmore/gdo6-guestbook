@@ -62,7 +62,7 @@ final class View extends MethodQueryList
     public function gdoQuery()
     {
         return parent::gdoQuery()->where('gbm_guestbook=' . $this->guestbook->getID())->
-        where('gbm_approved IS NOT NULL')->where('gbm_deleted IS NULL');
+        where('gbm_approved IS NOT NULL')->where('gbm_deleted IS NULL')->joinObject('gbm_user');
     }
     
     public function gdoTable()
@@ -87,6 +87,10 @@ final class View extends MethodQueryList
         {
             $card = GDT_Card::make('gbcard')->gdo($gb);
             $card->title($gb->gdoColumn('gb_title'));
+            if ($gb->getID() !== '1')
+            {
+                $card->creatorHeader(null, 'gb_uid');
+            }
             $card->addField(GDT_Paragraph::make()->html($gb->displayDescription()));
         }
         

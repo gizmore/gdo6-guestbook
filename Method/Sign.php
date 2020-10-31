@@ -14,6 +14,7 @@ use GDO\Guestbook\GDO_GuestbookMessage;
 use GDO\Date\Time;
 use GDO\Mail\Mail;
 use GDO\UI\GDT_Link;
+use GDO\Core\Website;
 
 /**
  * Sign a guestbook.
@@ -127,7 +128,7 @@ final class Sign extends MethodForm
             $this->sendNotificationMails($gb, $message);
         }
         
-        return $this->message('msg_gb_signed');
+        return $this->message('msg_gb_signed')->add(Website::redirect($gb->href_gb_view(), 12));
     }
     
     ##################

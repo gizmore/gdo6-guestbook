@@ -30,6 +30,7 @@ return array(
 'link_sign_guestbook' => 'Sign the guestbook',
 'link_edit_guestbook' => 'Edit the guestbook',
 'link_gb_approval_list' => 'Moderate entries',
+'view_users_guestbook' => '%s\'s guestbook',
 'err_no_guestbook' => 'The guestbook does not exist.',
 
 # Crud
