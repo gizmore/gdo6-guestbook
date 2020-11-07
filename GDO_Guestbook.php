@@ -40,7 +40,7 @@ final class GDO_Guestbook extends GDO
 		    GDT_Title::make('gb_title')->notNull(),
 		    GDT_Message::make('gb_descr')->label('description'),
 		    GDT_CreatedAt::make('gb_date'),
-		    GDT_Level::make('gb_level'),
+		    GDT_Level::make('gb_level')->label('guestbook_level'),
 		    GDT_Checkbox::make('gb_locked')->initial('0'),
 		    GDT_Checkbox::make('gb_moderated')->initial('0'),
 		    GDT_Checkbox::make('gb_notify_mail')->initial('1'),

@@ -24,6 +24,7 @@ return array(
 'link_create_guestbook' => 'Create a guestbook',
 'link_edit_guestbook' => 'Edit your guestbook',
 'cfg_user_guestbook' => 'Your guestbook Id',
+'guestbook_level' => 'Minlevel to view and sign.',
     
 # View
 'list_view_guestbook' => '%s entries in the guestbook',
