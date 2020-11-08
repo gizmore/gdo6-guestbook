@@ -126,7 +126,7 @@ final class Crud extends MethodCrud
         $form->addField($table->gdoColumn('gb_descr'));
         
         $form->addField(GDT_Divider::make('div2')->label('div_gb_signing'));
-        $form->addField($table->gdoColumn('gb_locked'));
+        $form->addField($table->gdoColumn('gb_unlocked'));
         $form->addField($table->gdoColumn('gb_moderated'));
         $form->addField($table->gdoColumn('gb_notify_mail'));
         

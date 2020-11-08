@@ -41,7 +41,7 @@ final class GDO_Guestbook extends GDO
 		    GDT_Message::make('gb_descr')->label('description'),
 		    GDT_CreatedAt::make('gb_date'),
 		    GDT_Level::make('gb_level')->label('guestbook_level'),
-		    GDT_Checkbox::make('gb_locked')->initial('0'),
+		    GDT_Checkbox::make('gb_unlocked')->initial('1'),
 		    GDT_Checkbox::make('gb_moderated')->initial('0'),
 		    GDT_Checkbox::make('gb_notify_mail')->initial('1'),
 		    GDT_Checkbox::make('gb_guest_view')->initial('1'),
@@ -64,7 +64,7 @@ final class GDO_Guestbook extends GDO
 	public function getDate() { return $this->getVar('gb_date'); }
 	# Options
 	public function getLevel() { return $this->getValue('gb_level'); }
-	public function isLocked() { return $this->getValue('gb_locked'); }
+	public function isLocked() { return !$this->getValue('gb_unlocked'); }
 	public function isModerated() { return $this->getValue('gb_moderated'); }
 	public function isGuestViewable() { return $this->getValue('gb_guest_view'); }
 	public function isGuestWriteable() { return $this->getValue('gb_guest_sign'); }

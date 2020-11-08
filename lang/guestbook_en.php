@@ -39,7 +39,7 @@ return array(
 'guestbook_default_title' => 'Guestbook',
 'guestbook_default_descr' => 'Guestbook for %s',
 'div_gb_signing' => 'Signing',
-'gb_locked' => 'Is signing disabled?',
+'gb_unlocked' => 'Is signing enabled?',
 'gb_moderated' => 'Shall entries be moderated?',
 'gb_notify_mail' => 'Enable Email notification?',
 'div_gb_permissions' => 'Permissions',
@@ -58,7 +58,7 @@ return array(
 'msg_gb_signed' => 'Thank you for your guestbook entry. It is now shown.',
 
 # Approvelist
-'list_approvelist' => '%s entries to approve',
+'list_guestbook_approvelist' => '%s entries to approve',
     
 # Approve
 'err_already_approved' => 'This guestbook entry has been approved already.',
