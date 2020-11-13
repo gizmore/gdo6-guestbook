@@ -11,7 +11,6 @@ use GDO\User\GDO_User;
 use GDO\User\PermissionException;
 use GDO\UI\GDT_Divider;
 use GDO\Core\MethodAdmin;
-use GDO\User\GDO_UserSetting;
 use GDO\UI\GDT_Page;
 
 /**
@@ -165,7 +164,7 @@ final class Crud extends MethodCrud
     
     public function afterCreate(GDT_Form $form, GDO $gdo)
     {
-        GDO_UserSetting::set('user_guestbook', $gdo->getID());
+        Module_Guestbook::instance()->saveSetting('user_guestbook', $gdo->getID());
     }
     
 }

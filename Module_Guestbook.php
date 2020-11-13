@@ -8,7 +8,6 @@ use GDO\UI\GDT_Bar;
 use GDO\UI\GDT_Link;
 use GDO\User\GDO_User;
 use GDO\DB\GDT_Object;
-use GDO\User\GDO_UserSetting;
 use GDO\User\GDT_Level;
 use GDO\Core\GDT_Response;
 use GDO\UI\GDT_Card;
@@ -145,7 +144,7 @@ final class Module_Guestbook extends GDO_Module
 	public function getUserGuestbook(GDO_User $user=null)
 	{
 	    $user = $user ? $user : GDO_User::current();
-	    return GDO_UserSetting::userGetValue($user, 'user_guestbook');
+	    return Module_Guestbook::instance()->userSettingValue($user, 'user_guestbook');
 	}
 	
 	public function getUserConfig()
@@ -196,9 +195,12 @@ final class Module_Guestbook extends GDO_Module
 	{
 	    if ($this->cfgRightBar())
 	    {
-	        if ($gb = $this->getUserGuestbook())
+	        if ($this->cfgAllowUserGB())
 	        {
-                $bar->addField(GDT_Link::make('link_your_guestbook')->href(href('Guestbook', 'View', '&id=' . $gb->getID())));
+    	        if ($gb = $this->getUserGuestbook())
+    	        {
+                    $bar->addField(GDT_Link::make('link_your_guestbook')->href(href('Guestbook', 'View', '&id=' . $gb->getID())));
+    	        }
 	        }
 	    }
 	}
