@@ -11,6 +11,7 @@ use GDO\DB\GDT_Object;
 use GDO\User\GDT_Level;
 use GDO\Core\GDT_Response;
 use GDO\UI\GDT_Card;
+use GDO\UI\GDT_Page;
 
 /**
  * Creates one global site guestbook.
@@ -177,28 +178,26 @@ final class Module_Guestbook extends GDO_Module
 	############
 	### Hook ###
 	############
-	public function hookLeftBar(GDT_Bar $bar)
+	public function onInitSidebar()
 	{
-	    if ($this->cfgLeftBar())
+// 	    if ($this->cfgLeftBar())
 	    {
 	        if ($gb = $this->getSiteGuestbook())
 	        {
 	            if ($gb->canView(GDO_User::current()))
 	            {
+	                $bar = GDT_Page::$INSTANCE->leftNav;
 	                $bar->addField(GDT_Link::make('link_guestbook')->href(href('Guestbook', 'View', '&id=1')));
 	            }
 	        }
 	    }
-	}
-	
-	public function hookRightBar(GDT_Bar $bar)
-	{
-	    if ($this->cfgRightBar())
+// 	    if ($this->cfgRightBar())
 	    {
 	        if ($this->cfgAllowUserGB())
 	        {
     	        if ($gb = $this->getUserGuestbook())
     	        {
+    	            $bar = GDT_Page::$INSTANCE->rightNav;
                     $bar->addField(GDT_Link::make('link_your_guestbook')->href(href('Guestbook', 'View', '&id=' . $gb->getID())));
     	        }
 	        }
