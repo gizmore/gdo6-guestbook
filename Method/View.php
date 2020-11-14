@@ -1,7 +1,6 @@
 <?php
 namespace GDO\Guestbook\Method;
 
-use GDO\Table\GDT_List;
 use GDO\Table\MethodQueryList;
 use GDO\Guestbook\GDO_Guestbook;
 use GDO\Guestbook\GDO_GuestbookMessage;
@@ -11,16 +10,15 @@ use GDO\User\GDO_User;
 use GDO\UI\GDT_Card;
 use GDO\UI\GDT_Paragraph;
 use GDO\Guestbook\Module_Guestbook;
+use GDO\Table\GDT_Table;
 
 final class View extends MethodQueryList
 {
     /** @var $guestbook GDO_Guestbook **/
     private $guestbook;
 
-    public function isQuicksorted() { return true; }
-    public function isQuicksearchable() { return true; }
-    public function defaultOrderField() { return 'gbm_created'; }
-    public function defaultOrderDirAsc() { return false; }
+    public function getDefaultOrder() { return 'gbm_created'; }
+    public function getDefaultOrderDir() { return false; }
     
     public function gdoParameters()
     {
@@ -29,7 +27,7 @@ final class View extends MethodQueryList
         ));
     }
     
-    public function gdoFilters()
+    public function gdoHeaders()
     {
         $table = GDO_GuestbookMessage::table();
         return array(
@@ -59,9 +57,9 @@ final class View extends MethodQueryList
         }
     }
     
-    public function gdoQuery()
+    public function getQuery()
     {
-        return parent::gdoQuery()->where('gbm_guestbook=' . $this->guestbook->getID())->
+        return parent::getQuery()->where('gbm_guestbook=' . $this->guestbook->getID())->
         where('gbm_approved IS NOT NULL')->where('gbm_deleted IS NULL')->joinObject('gbm_user');
     }
     
@@ -70,7 +68,7 @@ final class View extends MethodQueryList
         return GDO_GuestbookMessage::table();
     }
 
-    protected function setupTitle(GDT_List $list)
+    protected function setupTitle(GDT_Table $list)
     {
         $list->title(t('list_view_guestbook', [$list->countItems()]));
     }
@@ -91,10 +89,10 @@ final class View extends MethodQueryList
             {
                 $card->creatorHeader(null, 'gb_uid');
             }
-            $card->addField(GDT_Paragraph::make()->html($gb->displayDescription()));
+            $card->addField(GDT_Paragraph::make()->textRaw($gb->displayDescription()));
         }
         
-        return $bar->add(GDT_Response::makeWith($card))->add($this->renderPage());
+        return $bar->add(GDT_Response::makeWith($card))->add($this->renderTable());
     }
     
 }

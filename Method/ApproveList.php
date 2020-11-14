@@ -40,9 +40,9 @@ final class ApproveList extends MethodQueryList
         }
     }
     
-    public function gdoQuery()
+    public function getQuery()
     {
-        $query = parent::gdoQuery()->where('gbm_approved IS NULL')->where('gbm_deleted IS NULL');
+        $query = parent::getQuery()->where('gbm_approved IS NULL')->where('gbm_deleted IS NULL');
         if ($gb = $this->getGuestbook())
         {
             $query->where('gbm_guestbook='.$gb->getID());
