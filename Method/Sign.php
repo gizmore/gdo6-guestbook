@@ -73,9 +73,10 @@ final class Sign extends MethodForm
         $mod = Module_Guestbook::instance();
         $table = GDO_GuestbookMessage::table();
 
+        $form->addField($table->gdoColumn('gbm_email'));
         if ($mod->cfgAllowEMail() && $gb->isEMailAllowed())
         {
-            $form->addField($table->gdoColumn('gbm_email'));
+            $form->addField($table->gdoColumn('gbm_email_public'));
         }
         
         if ($mod->cfgAllowURL() && $gb->isURLAllowed())

@@ -9,7 +9,7 @@ return array(
 # Config
 'cfg_gb_ipp' => 'Messages per page',
 'cfg_gb_allow_url' => 'Allow a website link for each entry?',
-'cfg_gb_allow_email' => 'Allow an email field for each entry?',
+'cfg_gb_allow_email' => 'Allow to make emails public for an entry?',
 'cfg_gb_allow_guest_view' => 'Allow guests to view the guestbook?',
 'cfg_gb_allow_guest_sign' => 'Allow guests to sign the guestbook?',
 'cfg_gb_allow_level' => 'Allow setting a min level for signing?',
@@ -51,6 +51,7 @@ return array(
 
 # Sign
 'ft_guestbook_sign' => 'Sign the guestbook',
+'gbm_email_public' => 'Show Email to the public?',
 'err_guestbook_sign' => 'You are not allowed to sign the guestbook.',
 'err_guestbook_locked' => 'The guestbook is currently disabled for writing messages.',
 'err_no_guests' => 'Guests are not allowed to sign the guestbook.',

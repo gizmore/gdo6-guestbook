@@ -15,6 +15,7 @@ use GDO\Net\GDT_Url;
 use GDO\Core\GDT_Template;
 use GDO\DB\GDT_DeletedBy;
 use GDO\DB\GDT_DeletedAt;
+use GDO\DB\GDT_Checkbox;
 
 /**
  * Guestbook messages.
@@ -38,6 +39,7 @@ final class GDO_GuestbookMessage extends GDO
             GDT_Object::make('gbm_guestbook')->notNull()->editable(false)->table(GDO_Guestbook::table()),
             GDT_Message::make('gbm_message')->notNull(),
             GDT_Email::make('gbm_email'),
+            GDT_Checkbox::make('gbm_email_public')->notNull()->initial('0'),
             GDT_Url::make('gbm_website')->reachable()->noFollow(),
             GDT_CreatedBy::make('gbm_user')->editable(false),
             GDT_CreatedAt::make('gbm_created'),
@@ -63,6 +65,7 @@ final class GDO_GuestbookMessage extends GDO
     public function getGuestbookID() { return $this->getVar('gbm_guestbook'); }
     public function isApproved() { return $this->getVar('gbm_approved') !== null; }
     public function isDeleted() { return $this->getVar('gbm_deleted') !== null; }
+    public function isEMailPublic() { return $this->getValue('gbm_email_public'); }
     
     ##############
     ### Render ###
@@ -102,4 +105,13 @@ final class GDO_GuestbookMessage extends GDO
         return $user->isStaff();
     }
 
+    public function canSeeMail(GDO_User $user)
+    {
+        if ($user->isStaff())
+        {
+            return true;
+        }
+        return $this->isEMailPublic();
+    }
+    
 }
