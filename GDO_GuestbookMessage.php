@@ -36,15 +36,15 @@ final class GDO_GuestbookMessage extends GDO
     {
         return array(
             GDT_AutoInc::make('gbm_id'),
-            GDT_Object::make('gbm_guestbook')->notNull()->editable(false)->table(GDO_Guestbook::table()),
+            GDT_Object::make('gbm_guestbook')->notNull()->editable(false)->table(GDO_Guestbook::table())->hidden(),
             GDT_Message::make('gbm_message')->notNull(),
             GDT_Email::make('gbm_email'),
-            GDT_Checkbox::make('gbm_email_public')->notNull()->initial('0'),
+            GDT_Checkbox::make('gbm_email_public')->notNull()->initial('0')->hidden(),
             GDT_Url::make('gbm_website')->reachable()->noFollow(),
             GDT_CreatedBy::make('gbm_user')->editable(false),
             GDT_CreatedAt::make('gbm_created'),
-            GDT_User::make('gbm_approver')->editable(false),
-            GDT_DateTime::make('gbm_approved')->editable(false),
+            GDT_User::make('gbm_approver')->editable(false)->label('gbm_approver')->hidden(),
+            GDT_DateTime::make('gbm_approved')->editable(false)->hidden(),
             GDT_DeletedBy::make('gbm_deletor'),
             GDT_DeletedAt::make('gbm_deleted'),
         );

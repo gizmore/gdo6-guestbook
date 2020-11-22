@@ -76,7 +76,7 @@ final class GDO_Guestbook extends GDO
 	### Render ###
 	##############
 	public function displayTitle() { return html($this->getTitle()); }
-	public function displayDescription() { return $this->getValue('gb_descr'); }
+	public function displayDescription() { return $this->gdoColumn('gb_descr')->renderCell(); }
 	
 	#############
 	### HREFs ###
