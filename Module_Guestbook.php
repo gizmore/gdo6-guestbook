@@ -85,15 +85,20 @@ final class Module_Guestbook extends GDO_Module
 	    }
 	    $user = GDO_User::current();
 	    $bar = GDT_Bar::make()->horizontal();
+	    
 	    $linkSign = GDT_Link::make('link_sign_guestbook')->enabled($gb->canSign($user))->href($gb->href_gb_sign());
 	    $bar->addField($linkSign);
-	    $linkEdit = GDT_Link::make('link_edit_guestbook')->enabled($gb->canModerate($user))->href($gb->href_gb_edit());
-	    $bar->addField($linkEdit);
-	    $linkApproval = GDT_Link::make('link_gb_approval_list')->enabled($gb->canModerate($user))->href($gb->href_gb_approval());
-	    $bar->addField($linkApproval);
+	    
+	    if ($gb->canModerate($user))
+	    {
+    	    $linkEdit = GDT_Link::make('link_edit_guestbook')->enabled($gb->canModerate($user))->href($gb->href_gb_edit());
+    	    $bar->addField($linkEdit);
+
+    	    $linkApproval = GDT_Link::make('link_gb_approval_list')->enabled($gb->canModerate($user))->href($gb->href_gb_approval());
+    	    $bar->addField($linkApproval);
+	    }
 	    return GDT_Response::makeWith($bar);
 	}
-	
 	
 	##############
 	### Config ###

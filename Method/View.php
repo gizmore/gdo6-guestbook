@@ -89,7 +89,7 @@ final class View extends MethodQueryList
             {
                 $card->creatorHeader(null, 'gb_uid');
             }
-            $card->addField(GDT_Paragraph::make()->textRaw($gb->displayDescription()));
+            $card->addField($gb->gdoColumn('gb_descr'));
         }
         
         return $bar->add(GDT_Response::makeWith($card))->add($this->renderTable());
