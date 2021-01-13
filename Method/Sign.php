@@ -150,7 +150,14 @@ final class Sign extends MethodForm
         $mail->setSubject(tusr($user, 'mail_subj_gb_moderate', [sitename()]));
         $linkApprove = GDT_Link::make('btn_approve')->href($msg->hrefApprove())->renderCell();
         $linkDelete = GDT_Link::make('btn_delete')->href($msg->hrefDelete())->renderCell();
-        $args = [$user->displayNameLabel(), sitename(), $msg->displayEmail(), $msg->displayWebsite(), $msg->displayMessage(), $linkApprove, $linkDelete];
+        $args = [
+            $user->displayNameLabel(),
+            sitename(),
+            $msg->displayEmail(),
+            $msg->displayWebsite(),
+            $msg->displayMessage(),
+            $linkApprove,
+            $linkDelete];
         $mail->setBody(tusr($user, 'mail_body_gb_moderate', $args));
         $mail->sendToUser($user);
     }
@@ -172,7 +179,13 @@ final class Sign extends MethodForm
         $mail = Mail::botMail();
         $mail->setSubject(tusr($user, 'mail_subj_notify_gb', [sitename()]));
         $linkDelete = GDT_Link::make('btn_delete')->href($msg->hrefDelete())->renderCell();
-        $args = [$user->displayNameLabel(), sitename(), $msg->displayEmail(), $msg->displayWebsite(), $msg->displayMessage(), $linkDelete];
+        $args = [
+            $user->displayNameLabel(),
+            sitename(),
+            $msg->displayEmail(),
+            $msg->displayWebsite(),
+            $msg->displayMessage(),
+            $linkDelete];
         $mail->setBody(tusr($user, 'mail_body_notify_gb', $args));
         $mail->sendToUser($user);
     }
