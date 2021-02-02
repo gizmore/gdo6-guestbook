@@ -108,7 +108,7 @@ final class Module_Guestbook extends GDO_Module
 	public function getConfig()
 	{
 	    return array(
-	        GDT_UInt::make('gb_ipp')->initial(10)->max(100),
+	        GDT_UInt::make('gb_ipp')->initial('10')->max(100),
 	        GDT_Checkbox::make('gb_allow_guest_view')->initial('1'),
 	        GDT_Checkbox::make('gb_allow_guest_sign')->initial('1'),
 	        GDT_Checkbox::make('gb_allow_url')->initial('1'),
@@ -150,16 +150,16 @@ final class Module_Guestbook extends GDO_Module
 	public function getUserGuestbook(GDO_User $user=null)
 	{
 	    $user = $user ? $user : GDO_User::current();
-	    return Module_Guestbook::instance()->userSettingValue($user, 'user_guestbook');
+	    return self::instance()->userSettingValue($user, 'user_guestbook');
 	}
 	
 	public function getUserConfig()
 	{
 	    $config = [];
-	    if ($this->cfgAllowUserGB())
-	    {
+// 	    if ($this->cfgAllowUserGB())
+// 	    {
 	        $config[] = GDT_Object::make('user_guestbook')->table(GDO_Guestbook::table());
-	    }
+// 	    }
 	    return $config;
 	}
 	

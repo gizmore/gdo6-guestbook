@@ -107,6 +107,7 @@ final class Sign extends MethodForm
             'gbm_message' => $form->getFormVar('gbm_message'),
             'gbm_email' => $form->getFormVar('gbm_email'),
             'gbm_website' => $form->getFormVar('gbm_website'),
+            'gbm_email_public' => $form->getFormVar('gbm_website'),
         ));
         
         if (!$gb->isModerated())
