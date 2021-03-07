@@ -18,16 +18,23 @@ use GDO\Core\Website;
 
 /**
  * Sign a guestbook.
+ * Sends notification and moderation mails.
+ * 
  * @author gizmore
- * @version 6.10
- * @since 3.00
+ * @version 6.10.1
+ * @since 3.2.0
+ * 
+ * @see GDO_Guestbook
+ * @see GDO_GuestbookMessage
  */
 final class Sign extends MethodForm
 {
     ############
     ### Init ###
     ############
-    /** @var $guestbook GDO_Guestbook **/
+    /**
+     * @var GDO_Guestbook
+     */
     private $guestbook;
     
     public function init()
@@ -51,9 +58,9 @@ final class Sign extends MethodForm
     ##############
     public function gdoParameters()
     {
-        return array(
+        return [
             GDT_Object::make('id')->table(GDO_Guestbook::table())->notNull(),
-        );
+        ];
     }
     
     /**
@@ -102,14 +109,14 @@ final class Sign extends MethodForm
     {
         $gb = $this->guestbook;
         
-        $message = GDO_GuestbookMessage::blank(array(
+        $message = GDO_GuestbookMessage::blank([
             'gbm_guestbook' => $this->guestbook->getID(),
             'gbm_message' => $form->getFormVar('gbm_message'),
             'gbm_email' => $form->getFormVar('gbm_email'),
             'gbm_website' => $form->getFormVar('gbm_website'),
             'gbm_email_public' => $form->getFormVar('gbm_website'),
-        ));
-        
+        ]);
+
         if (!$gb->isModerated())
         {
             $message->setVars(array(

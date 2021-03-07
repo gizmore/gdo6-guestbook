@@ -33,6 +33,7 @@ return array(
 'link_gb_approval_list' => 'Moderate entries',
 'view_users_guestbook' => '%s\'s guestbook',
 'err_no_guestbook' => 'The guestbook does not exist.',
+'list_guestbook_view' => '%s guestbook entries.',
 
 # Crud
 'div_gb_appearance' => 'Appearance',
