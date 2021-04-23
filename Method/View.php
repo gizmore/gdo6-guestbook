@@ -8,7 +8,6 @@ use GDO\DB\GDT_Object;
 use GDO\Core\GDT_Response;
 use GDO\User\GDO_User;
 use GDO\UI\GDT_Card;
-use GDO\UI\GDT_Paragraph;
 use GDO\Guestbook\Module_Guestbook;
 use GDO\Table\GDT_Table;
 
@@ -59,7 +58,7 @@ final class View extends MethodQueryList
     
     public function getQuery()
     {
-        return $this->gdoTable()->select('gdo_guestbookmessage.*')->
+        return $this->gdoTable()->select()->
             where('gbm_guestbook=' . $this->guestbook->getID())->
             where('gbm_approved IS NOT NULL')->
             where('gbm_deleted IS NULL')->
