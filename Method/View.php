@@ -59,8 +59,11 @@ final class View extends MethodQueryList
     
     public function getQuery()
     {
-        return parent::getQuery()->where('gbm_guestbook=' . $this->guestbook->getID())->
-        where('gbm_approved IS NOT NULL')->where('gbm_deleted IS NULL')->joinObject('gbm_user');
+        return $this->gdoTable()->select('gdo_guestbookmessage.*')->
+            where('gbm_guestbook=' . $this->guestbook->getID())->
+            where('gbm_approved IS NOT NULL')->
+            where('gbm_deleted IS NULL')->
+            joinObject('gbm_user');
     }
     
     public function gdoTable()
