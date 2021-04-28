@@ -58,7 +58,8 @@ final class View extends MethodQueryList
     
     public function getQuery()
     {
-        return $this->gdoTable()->select()->
+        return $this->gdoTable()->
+            select('gdo_guestbookmessage.*')->
             where('gbm_guestbook=' . $this->guestbook->getID())->
             where('gbm_approved IS NOT NULL')->
             where('gbm_deleted IS NULL')->
