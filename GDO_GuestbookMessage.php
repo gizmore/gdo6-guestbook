@@ -7,9 +7,9 @@ use GDO\DB\GDT_Object;
 use GDO\DB\GDT_CreatedBy;
 use GDO\DB\GDT_CreatedAt;
 use GDO\User\GDO_User;
+use GDO\User\GDT_User;
 use GDO\UI\GDT_Message;
 use GDO\Date\GDT_DateTime;
-use GDO\Profile\GDT_User;
 use GDO\Mail\GDT_Email;
 use GDO\Net\GDT_Url;
 use GDO\Core\GDT_Template;
@@ -38,7 +38,7 @@ final class GDO_GuestbookMessage extends GDO
             GDT_AutoInc::make('gbm_id'),
             GDT_Object::make('gbm_guestbook')->notNull()->editable(false)->table(GDO_Guestbook::table())->hidden(),
             GDT_Message::make('gbm_message')->notNull(),
-            GDT_Email::make('gbm_email'),
+            GDT_Email::make('gbm_email')->searchable(false),
             GDT_Checkbox::make('gbm_email_public')->notNull()->initial('0')->hidden(),
             GDT_Url::make('gbm_website')->reachable()->noFollow(),
             GDT_CreatedBy::make('gbm_user')->editable(false),
