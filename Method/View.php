@@ -96,7 +96,6 @@ final class View extends MethodQueryList
         }
         
         return $bar->addField($card)->addField($this->renderTable());
-        GDT_Response::makeWith($card))->addField($this->renderTable());
     }
     
 }
