@@ -59,7 +59,7 @@ final class Delete extends Method
         ));
         
         $href = href('Guestbook', 'ApproveList', '&id='.$msg->getGuestbookID());
-        return $this->message('msg_gbmsg_deleted')->add(Website::redirect($href, 12));
+        return $this->message('msg_gbmsg_deleted')->addField(Website::redirect($href, 12));
     }
     
 }

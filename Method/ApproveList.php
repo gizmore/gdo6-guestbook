@@ -68,7 +68,7 @@ final class ApproveList extends MethodQueryList
             }
         }
         $mod = Module_Guestbook::instance();
-        return $mod->guestbookViewBar($gb)->add(parent::execute());
+        return $mod->guestbookViewBar($gb)->addField(parent::execute());
     }
     
 }

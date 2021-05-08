@@ -54,7 +54,7 @@ final class Approve extends Method
         ));
         
         $href = href('Guestbook', 'ApproveList', '&id='.$message->getGuestbookID());
-        return $this->message('msg_gbm_approved')->add(Website::redirect($href, 12));
+        return $this->message('msg_gbm_approved')->addField(Website::redirect($href, 12));
     }
 
 }

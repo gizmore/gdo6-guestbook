@@ -95,7 +95,7 @@ final class View extends MethodQueryList
             $card->addField($gb->gdoColumn('gb_descr'));
         }
         
-        return $bar->add(GDT_Response::makeWith($card))->add($this->renderTable());
+        return $bar->add(GDT_Response::makeWith($card))->addField($this->renderTable());
     }
     
 }
