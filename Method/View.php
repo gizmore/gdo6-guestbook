@@ -16,8 +16,7 @@ final class View extends MethodQueryList
     /** @var $guestbook GDO_Guestbook **/
     private $guestbook;
 
-    public function getDefaultOrder() { return 'gbm_created'; }
-    public function getDefaultOrderDir() { return false; }
+    public function getDefaultOrder() { return 'gbm_created DESC'; }
     
     public function gdoParameters()
     {
