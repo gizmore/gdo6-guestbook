@@ -54,10 +54,10 @@ final class Delete extends Method
             return $this->error('err_token');
         }
         
-        $msg->saveVars(array(
-            'gbm_deleted' => Application::$MICROTIME,
+        $msg->saveVars([
+            'gbm_deleted' => Time::getDate(),
             'gbm_deletor' => GDO_User::current()->getID(),
-        ));
+        ]);
         
         $href = href('Guestbook', 'ApproveList', '&id='.$msg->getGuestbookID());
         return $this->message('msg_gbmsg_deleted')->addField(Website::redirect($href, 12));
