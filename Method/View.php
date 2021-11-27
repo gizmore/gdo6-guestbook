@@ -45,6 +45,7 @@ final class View extends MethodQueryList
     
     public function init()
     {
+    	parent::init();
         if (!($this->guestbook = $this->getGuestbook()))
         {
             return $this->error('err_no_guestbook');
