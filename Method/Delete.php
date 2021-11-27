@@ -8,6 +8,7 @@ use GDO\Guestbook\GDO_GuestbookMessage;
 use GDO\DB\GDT_Token;
 use GDO\Date\Time;
 use GDO\User\GDO_User;
+use GDO\Core\Application;
 
 /**
  * Delete an entry via token hashcode.
@@ -54,7 +55,7 @@ final class Delete extends Method
         }
         
         $msg->saveVars(array(
-            'gbm_deleted' => Time::getDate(),
+            'gbm_deleted' => Application::$MICROTIME,
             'gbm_deletor' => GDO_User::current()->getID(),
         ));
         
