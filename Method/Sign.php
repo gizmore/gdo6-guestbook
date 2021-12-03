@@ -37,9 +37,9 @@ final class Sign extends MethodForm
      */
     private $guestbook;
     
-    public function init()
+    public function onInit()
     {
-        parent::init();
+        parent::onInit();
         
         if (!($this->guestbook = $this->getGuestbook()))
         {

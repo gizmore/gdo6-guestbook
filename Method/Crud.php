@@ -79,9 +79,9 @@ final class Crud extends MethodCrud
         return $gdo->getUser() === GDO_User::current();
     }
     
-    public function init()
+    public function onInit()
     {
-        parent::init();
+        parent::onInit();
         
         $mod = Module_Guestbook::instance();
         

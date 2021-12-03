@@ -43,9 +43,9 @@ final class View extends MethodQueryList
     public function getGuestbook() { return $this->gdoParameterValue('id'); }
 //     public function getID() { return $this->gdoParameterVar('id'); }
     
-    public function init()
+    public function onInit()
     {
-    	parent::init();
+    	parent::onInit();
         if (!($this->guestbook = $this->getGuestbook()))
         {
             return $this->error('err_no_guestbook');
